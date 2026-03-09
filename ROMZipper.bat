@@ -1,7 +1,7 @@
 @echo off
 set "zipExe=C:\Program Files\7-Zip\7z.exe"
 set "dir=%~dp0"
-cd /d "%dir%"
+pushd "%dir%"
 for %%I in (.) do set "folderName=%%~nxI"
 set "outputDir=%folderName% compressed"
 if not exist "%outputDir%" mkdir "%outputDir%"
@@ -10,5 +10,7 @@ for %%F in (*.*) do (
         "%zipExe%" a -tzip -mx=1 "%outputDir%\%%~nF.zip" "%%F"
     )
 )
+
+popd
 echo Done!
 pause
